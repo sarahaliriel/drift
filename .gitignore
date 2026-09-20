@@ -1,0 +1,31 @@
+# Dependencies and framework output
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+
+# Environment files and secrets (an intentionally committed template is allowed)
+.env
+.env.*
+!.env.example
+
+# Caches and logs
+.cache/
+.turbo/
+*.cache
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# Local tooling and operating-system files
+.DS_Store
+.idea/
+.vscode/
+
+# Local agent instructions
+AGENTS.md
