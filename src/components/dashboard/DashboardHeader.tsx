@@ -1,11 +1,14 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { dashboardNavigationGroups } from "@/config/dashboard-navigation";
+import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { WaveText } from "@/components/ui/WaveText";
 
 export function DashboardHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,7 +16,7 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-20 flex h-[72px] items-center justify-between border-b bg-white/90 px-4 backdrop-blur-xl sm:px-7 lg:hidden">
+      <header className="sticky top-0 z-20 flex h-[72px] items-center justify-between border-b bg-surface-overlay px-4 backdrop-blur-xl sm:px-7 lg:hidden">
         <div className="flex items-center gap-3 lg:hidden">
           <button
             type="button"
@@ -23,15 +26,17 @@ export function DashboardHeader() {
           >
             <Menu className="size-5" />
           </button>
-          <span className="text-lg font-semibold tracking-tight">Drift</span>
+          <Link href="/" aria-label="Drift">
+            <Image src="/logos/drift-logo-v1.png" alt="Drift" width={36} height={36} priority />
+          </Link>
         </div>
       </header>
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <button type="button" className="absolute inset-0 bg-black/35" onClick={() => setMobileOpen(false)} aria-label="Fechar menu" />
-          <div className="relative h-full w-[min(82vw,280px)] bg-white">
+          <button type="button" className="absolute inset-0 bg-surface-overlay" onClick={() => setMobileOpen(false)} aria-label="Fechar menu" />
+          <div className="relative h-full w-[min(82vw,280px)] bg-surface">
             <div className="flex h-full flex-col p-5">
-              <div className="flex items-center justify-between"><span className="text-xl font-semibold tracking-tight">Drift</span><button type="button" onClick={() => setMobileOpen(false)} className="text-sm font-semibold">Close</button></div>
+              <div className="flex items-center justify-between"><Link href="/" aria-label="Drift"><Image src="/logos/drift-logo-v1.png" alt="Drift" width={40} height={40} priority /></Link><button type="button" onClick={() => setMobileOpen(false)} className="animated-link text-sm font-semibold"><WaveText>Close</WaveText></button></div>
               <nav className="mt-8 space-y-5 overflow-y-auto" aria-label="Menu da dashboard">
                 {dashboardNavigationGroups.map((group) => (
                   <div key={group.label}>
@@ -41,9 +46,9 @@ export function DashboardHeader() {
                         const active = href === "/dashboard" ? pathname === href : pathname.startsWith(href);
 
                         return (
-                        <Link key={label} href={href} onClick={() => setMobileOpen(false)} className={`flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium ${active ? "bg-brand text-foreground" : "text-muted"}`}>
+                        <AnimatedLink key={label} href={href} onClick={() => setMobileOpen(false)} className={`flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium ${active ? "bg-primary text-primary-foreground" : "text-muted hover:bg-surface-secondary hover:text-foreground"}`}>
                           <Icon className="size-[18px]" /> {label}
-                        </Link>
+                        </AnimatedLink>
                         );
                       })}
                     </div>
