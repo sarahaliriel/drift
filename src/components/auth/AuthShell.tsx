@@ -9,7 +9,7 @@ type AuthShellProps = {
 export function AuthShell({ children, title, description }: AuthShellProps) {
   return (
     <section id="auth-form" className="auth-form-panel">
-      <h1 className="font-(family-name:--font-display) text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">
+      <h1 className="font-display text-3xl tracking-[-0.02em] sm:text-4xl">
         {title}
       </h1>
       <p className="mt-3 text-sm leading-6 text-muted">{description}</p>

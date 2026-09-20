@@ -1,25 +1,25 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  email: z.email("Digite um e-mail válido."),
-  password: z.string().min(6, "A senha precisa ter pelo menos 6 caracteres."),
+  email: z.email("Enter a valid email address."),
+  password: z.string().min(6, "Password must be at least 6 characters."),
 });
 
 export const registerSchema = z
   .object({
-    name: z.string().min(2, "Digite seu nome."),
-    email: z.email("Digite um e-mail válido."),
-    password: z.string().min(8, "Use pelo menos 8 caracteres."),
+    name: z.string().min(2, "Enter your name."),
+    email: z.email("Enter a valid email address."),
+    password: z.string().min(8, "Use at least 8 characters."),
     confirmPassword: z.string(),
-    terms: z.boolean().refine(Boolean, "Aceite os termos para continuar."),
+    terms: z.boolean().refine(Boolean, "Accept the terms to continue."),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem.",
+    message: "Passwords do not match.",
     path: ["confirmPassword"],
   });
 
 export const forgotPasswordSchema = z.object({
-  email: z.email("Digite um e-mail válido."),
+  email: z.email("Enter a valid email address."),
 });
 
 export type LoginFormData = z.infer<typeof loginSchema>;

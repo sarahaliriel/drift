@@ -1,15 +1,16 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 
 import { CompactDesktopNavigation } from "@/components/marketing/site-header/compact-desktop-navigation";
 import { Button, LinkButton } from "@/components/ui/Button";
 
 const routeCta = {
-  "/login": { label: "Criar conta", href: "/cadastro" },
-  "/cadastro": { label: "Entrar", href: "/login" },
-  "/recuperar-senha": "Voltar",
+  "/login": { label: "Create account", href: "/cadastro" },
+  "/cadastro": { label: "Sign in", href: "/login" },
+  "/recuperar-senha": "Go back",
 } as const;
 
 export function AuthNavbar() {
@@ -39,8 +40,8 @@ export function AuthNavbar() {
           href={cta.href}
           size="sm"
           className="auth-navbar-cta shrink-0 rounded-xl px-4 active:translate-y-px"
-          aria-label={`${cta.label} — ir para ${
-            cta.href === "/login" ? "a tela de login" : "a tela de cadastro"
+          aria-label={`${cta.label} — go to the ${
+            cta.href === "/login" ? "sign-in" : "sign-up"
           }`}
         >
           {cta.label}
@@ -53,7 +54,7 @@ export function AuthNavbar() {
         size="sm"
         className="auth-navbar-cta shrink-0 rounded-xl px-4 active:translate-y-px"
         onClick={goBack}
-        aria-label="Voltar para a página anterior"
+        aria-label="Go back to the previous page"
       >
         {cta}
       </Button>
@@ -63,7 +64,9 @@ export function AuthNavbar() {
   return (
     <header className="auth-navbar">
       <div className="auth-navbar-mobile">
-        <Link href="/" className="text-xl font-semibold tracking-tight">Drift</Link>
+        <Link href="/" aria-label="Drift">
+          <Image src="/logos/drift-logo-v1.png" alt="Drift" width={40} height={40} priority />
+        </Link>
         {renderCta()}
       </div>
       <div className="marketing-header-desktop-compact auth-navbar-desktop items-center">
