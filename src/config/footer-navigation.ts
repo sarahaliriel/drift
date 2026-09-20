@@ -12,9 +12,20 @@ export type FooterNavigationGroup = {
 export const footerNavigation: readonly FooterNavigationGroup[] = [
   {
     id: "footer-drift",
-    title: "Drift",
+    title: "Product",
     items: [
       { label: "Overview", href: "/#overview" },
+      { label: "How it works", href: "/#how-it-works" },
+      { label: "Documentation", href: "/docs" },
+    ],
+  },
+  {
+    id: "footer-resources",
+    title: "Resources",
+    items: [
+      { label: "Blog", href: "/blog" },
+      { label: "Examples", href: "/examples" },
+      { label: "Community", href: "/community" },
     ],
   },
   {

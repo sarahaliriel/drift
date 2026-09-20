@@ -24,10 +24,10 @@ export function MarketingHeader() {
   return (
     <>
       <motion.header
-        className="marketing-header marketing-enter marketing-enter-navbar fixed inset-x-0 top-0 z-50 h-20.5 bg-white"
+        className="marketing-header fixed inset-x-0 top-0 z-50 h-20.5 bg-surface"
         data-compact={isCompact || undefined}
         animate={{
-          backgroundColor: isCompact ? "rgba(255,255,255,0)" : "#ffffff",
+          backgroundColor: isCompact ? "transparent" : "var(--color-surface)",
         }}
         transition={reduceMotion ? { duration: 0.08 } : transition}
       >
@@ -93,7 +93,7 @@ export function MarketingHeader() {
         </div>
 
         <motion.div
-          className="marketing-header-rule pointer-events-none absolute inset-x-0 bottom-0 h-px bg-black/[0.07]"
+          className="marketing-header-rule pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border"
           animate={{ opacity: isCompact ? 0 : 1, scaleX: isCompact ? 0.2 : 1 }}
           transition={
             reduceMotion

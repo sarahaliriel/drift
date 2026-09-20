@@ -1,7 +1,8 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
@@ -74,7 +75,9 @@ export function MobileNavigation({
 
   return (
     <div className="flex h-full w-full items-center justify-between lg:hidden">
-      <Link href="/" className="relative z-30 shrink-0 text-xl font-semibold tracking-tight">Drift</Link>
+      <Link href="/" className="relative z-30 shrink-0" aria-label="Drift">
+        <Image src="/logos/drift-logo-v1.png" alt="Drift" width={40} height={40} priority />
+      </Link>
 
       <div className="flex items-center gap-2">
         <AnimatePresence initial={false}>
@@ -86,7 +89,7 @@ export function MobileNavigation({
               transition={{ duration: reduceMotion ? 0.08 : 0.24 }}
             >
               <LinkButton href="/cadastro" size="sm" className="h-11 rounded-xl px-3.5">
-                Get started
+                Scan project <ArrowRight className="size-4" aria-hidden="true" />
               </LinkButton>
             </motion.div>
           )}
@@ -95,7 +98,7 @@ export function MobileNavigation({
         <button
           ref={menuButtonRef}
           type="button"
-          className="relative z-30 grid size-12 place-items-center rounded-full border border-black/10 bg-white hover:bg-black/4"
+          className="relative z-30 grid size-12 place-items-center rounded-full border border-border bg-surface-elevated hover:bg-surface-secondary"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isOpen}
           aria-controls="menu-mobile"
@@ -114,18 +117,18 @@ export function MobileNavigation({
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
             transition={{ duration: reduceMotion ? 0.08 : 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className={cn("marketing-mobile-menu fixed inset-0 z-10 bg-white", isCompact && "marketing-mobile-menu-compact")}
+            className={cn("marketing-mobile-menu fixed inset-0 z-10 bg-surface", isCompact && "marketing-mobile-menu-compact")}
             aria-label="Navegação móvel"
           >
             <div className="mx-auto flex h-full max-w-lg flex-col px-5 pt-25 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-              <div className="border-t border-black/[0.08]">
+              <div className="border-t border-border">
               {marketingNavigation.map((item) => (
                 <AnimatedLink
                   key={item.label}
                   href={item.href}
                   aria-current={currentPath === item.href ? "page" : undefined}
                   onClick={() => onOpenChange(false)}
-                  className="flex min-h-16 w-full items-center border-b border-black/[0.08] py-4 text-[1.2rem] font-medium after:hidden hover:text-brand-green aria-[current=page]:text-brand-green"
+                  className="flex min-h-16 w-full items-center border-b border-border py-4 text-[1.2rem] font-medium after:hidden hover:text-accent aria-[current=page]:text-accent"
                 >
                   {item.label}
                 </AnimatedLink>
@@ -136,7 +139,7 @@ export function MobileNavigation({
                   Sign in
                 </LinkButton>
                 <LinkButton href="/cadastro" size="lg" className="w-full" onClick={() => onOpenChange(false)}>
-                  Get started
+                  Scan project <ArrowRight className="size-4" aria-hidden="true" />
                 </LinkButton>
               </div>
             </div>

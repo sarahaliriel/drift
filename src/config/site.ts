@@ -1,4 +1,5 @@
 export const siteConfig = {
   name: "Drift",
-  description: "Open-source design system consistency tooling.",
+  description: "Open-source tooling for design system consistency.",
+  locale: "en_US",
 } as const;

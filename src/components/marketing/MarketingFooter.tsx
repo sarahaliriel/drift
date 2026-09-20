@@ -1,46 +1,47 @@
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 import { FooterNavigation } from "@/components/marketing/FooterNavigation";
-import { LinkButton } from "@/components/ui/Button";
 
 export function MarketingFooter() {
   return (
-    <footer className="marketing-footer overflow-hidden text-white">
+    <footer className="marketing-footer overflow-hidden">
       <div className="container-wide">
-        <div className="footer-primary grid gap-8 pt-12 pb-10 md:gap-16 md:pt-28 md:pb-16 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-20 lg:pt-36 lg:pb-24 xl:grid-cols-[minmax(0,1.35fr)_minmax(37rem,1fr)]">
-          <div className="footer-enter">
-            <h2 className="max-w-3xl font-(family-name:--font-display) text-[clamp(2.25rem,10.5vw,2.65rem)] leading-[0.98] font-semibold tracking-[-0.06em] text-balance md:text-[clamp(2.65rem,5vw,5.6rem)]">
-              Keep your implementation <span className="text-brand">consistent</span>.
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-white/70 md:mt-7 md:text-lg">
-              Drift is an open-source work in progress.
-            </p>
-            <LinkButton
-              href="/cadastro"
-              size="lg"
-              className="footer-cta mt-5 w-full min-w-0 justify-between px-5 sm:w-auto sm:min-w-72 md:mt-9"
-            >
-              Get started
-              <ArrowRight className="footer-cta-arrow size-4" aria-hidden="true" />
-            </LinkButton>
+        <div className="footer-divider h-px bg-secondary-foreground/20" />
+
+        <div className="footer-primary grid gap-10 py-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-start md:gap-12 md:py-12 lg:grid-cols-[minmax(19rem,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="footer-enter flex w-full justify-center md:justify-start md:pt-4">
+            <div className="h-32 overflow-hidden md:h-36">
+              <Image
+                src="/logos/drift-logo-v2.png"
+                alt="Drift"
+                width={2000}
+                height={2000}
+                sizes="(min-width: 1024px) 21rem, (min-width: 768px) 18rem, 15rem"
+                className="-mt-16 h-auto w-60 md:-mt-20 md:w-72 lg:-mt-24 lg:w-80"
+              />
+            </div>
           </div>
-
-          <FooterNavigation />
+          <div className="w-full">
+            <FooterNavigation />
+          </div>
         </div>
 
-        <div className="footer-divider h-px origin-left bg-white/15" />
+        <div className="footer-divider h-px origin-left bg-secondary-foreground/20" />
 
-        <div className="grid gap-1.5 py-4 text-xs leading-5 text-white/60 md:grid-cols-3 md:items-center md:gap-3 md:py-7">
-          <p>© 2026 Drift.</p>
-          <p className="md:text-center">Open-source design system consistency tooling.</p>
+        <div className="flex flex-col gap-2 py-4 text-xs leading-5 text-secondary-foreground/65 sm:flex-row sm:items-center sm:justify-between md:py-5">
+          <p>
+            © 2026 Drift. {" "}
+            <a
+              href="https://sarahaliriel.tech"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
+            >
+              Sarah Aliriel
+            </a>
+          </p>
+          <p className="text-secondary-foreground/65">Open source</p>
         </div>
-
-        <p
-          className="footer-wordmark hidden select-none text-center font-(family-name:--font-display) font-semibold tracking-[-0.04em] md:block"
-          aria-hidden="true"
-        >
-          DRIFT
-        </p>
       </div>
     </footer>
   );

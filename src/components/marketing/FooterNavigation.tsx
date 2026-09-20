@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
+import { WaveText } from "@/components/ui/WaveText";
 import { footerNavigation } from "@/config/footer-navigation";
 
 export function FooterNavigation() {
@@ -18,7 +19,7 @@ export function FooterNavigation() {
 
   return (
     <nav
-      className="footer-nav grid grid-cols-1 gap-0 md:grid-cols-3 md:gap-x-8 md:gap-y-12"
+      className="footer-nav grid grid-cols-1 gap-0 md:grid-cols-3 md:gap-x-8"
       aria-label="Navegação do rodapé"
     >
       {footerNavigation.map((group) => {
@@ -34,15 +35,15 @@ export function FooterNavigation() {
             <h3 id={group.id}>
               <button
                 type="button"
-                className="footer-accordion-trigger"
+                className="footer-accordion-trigger animated-link"
                 aria-expanded={isExpanded}
                 aria-controls={panelId}
                 onClick={() => toggleGroup(group.id)}
               >
-                <span>{group.title}</span>
+                <WaveText>{group.title}</WaveText>
                 <Plus className="footer-accordion-icon size-4" aria-hidden="true" />
               </button>
-              <span className="hidden text-sm font-semibold tracking-[-0.01em] text-white md:inline">
+              <span className="hidden text-sm font-semibold tracking-[-0.01em] text-secondary-foreground md:inline">
                 {group.title}
               </span>
             </h3>
@@ -52,19 +53,19 @@ export function FooterNavigation() {
               className="footer-nav-panel"
               data-expanded={isExpanded ? "true" : "false"}
             >
-              <ul className="footer-nav-list mt-0 text-sm md:mt-6 md:space-y-3.5">
+              <ul className="footer-nav-list mt-0 text-sm md:mt-5 md:space-y-2.5">
                 {group.items.map((item) => (
-                  <li key={item.label} className="footer-nav-item flex items-center md:min-h-11">
+                  <li key={item.label} className="footer-nav-item flex items-center md:min-h-8">
                     {item.href ? (
                       <AnimatedLink
                         href={item.href}
                         tone="inverse"
-                        className="footer-nav-link text-white/70 hover:text-brand"
+                        className="footer-nav-link text-secondary-foreground/75 hover:text-primary"
                       >
                         {item.label}
                       </AnimatedLink>
                     ) : (
-                      <span className="inline-flex text-white/55">
+                      <span className="inline-flex text-secondary-foreground/60">
                         {item.label}
                       </span>
                     )}
