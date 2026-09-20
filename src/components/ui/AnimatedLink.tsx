@@ -1,18 +1,18 @@
 import Link from "next/link";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
-import { WaveText } from "@/components/ui/WaveText";
 import { cn } from "@/lib/utils";
+import { renderWaveText } from "@/components/ui/WaveText";
 
 type AnimatedLinkProps = Omit<ComponentProps<typeof Link>, "children"> & {
-  children: string;
+  children: ReactNode;
   tone?: "default" | "muted" | "inverse";
 };
 
 const tones = {
   default: "text-foreground",
   muted: "text-muted hover:text-foreground",
-  inverse: "text-white/60 hover:text-white",
+  inverse: "text-secondary-foreground/75 hover:text-secondary-foreground",
 } as const;
 
 export function AnimatedLink({
@@ -23,10 +23,10 @@ export function AnimatedLink({
 }: AnimatedLinkProps) {
   return (
     <Link
-      className={cn("animated-link wave-interactive", tones[tone], className)}
+      className={cn("animated-link", tones[tone], className)}
       {...props}
     >
-      <WaveText>{children}</WaveText>
+      {renderWaveText(children)}
     </Link>
   );
 }

@@ -1,0 +1,64 @@
+/* Drift's single source of visual truth. Components consume semantic roles only. */
+:root {
+  /* Base surfaces */
+  --color-background: #fdfffb;
+  --color-foreground: #0c0a14;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f4f2f7;
+  --color-surface-elevated: #ffffff;
+  --color-surface-overlay: rgb(12 10 20 / 0.72);
+
+  /* Brand and interactive states */
+  --color-primary: #c8f525;
+  --color-primary-hover: #d5fa54;
+  --color-primary-active: #b6e219;
+  --color-primary-foreground: #0c0a14;
+  --color-secondary: #7b00d5;
+  --color-secondary-hover: #9418ed;
+  --color-secondary-foreground: #fdfffb;
+  --color-accent: #c8f525;
+  --color-accent-secondary: #7b00d5;
+
+  /* Supporting semantic colors */
+  --color-muted: #625e70;
+  --color-muted-foreground: #817c8d;
+  --color-border: #ddd9e3;
+  --color-border-muted: #ebe8ef;
+  --color-border-strong: #aaa4b3;
+  --color-focus: #c8f525;
+  --color-disabled: #aaa4b3;
+  --color-destructive: #ff6f7d;
+  --color-success: #c8f525;
+  --color-warning: #ffc857;
+
+  /* Transparent treatments */
+  --color-primary-subtle: rgb(200 245 37 / 0.12);
+  --color-secondary-subtle: rgb(123 0 213 / 0.18);
+  --color-overlay: rgb(3 2 8 / 0.72);
+
+  /* Shape */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-full: 9999px;
+
+  /* Elevation and emphasis */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.22);
+  --shadow-md: 0 14px 38px rgb(0 0 0 / 0.28);
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.38);
+  --shadow-glow-primary: 0 0 28px rgb(200 245 37 / 0.2);
+  --shadow-glow-secondary: 0 0 28px rgb(123 0 213 / 0.25);
+
+  /* Reusable decorative treatments */
+  --gradient-brand: linear-gradient(115deg, var(--color-primary), var(--color-secondary));
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), #e6ff91);
+  --gradient-accent: linear-gradient(135deg, var(--color-secondary), #b75cff);
+
+  /* Motion and layout */
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 76rem;
+  --container-wide: 92rem;
+}

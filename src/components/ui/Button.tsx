@@ -1,18 +1,19 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-import { renderWaveText } from "@/components/ui/WaveText";
 import { cn } from "@/lib/utils";
+import { renderWaveText } from "@/components/ui/WaveText";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "dark";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "dark" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variants: Record<ButtonVariant, string> = {
   primary: "button-primary",
   secondary: "button-secondary",
-  outline: "button-secondary",
+  outline: "button-outline",
   ghost: "button-ghost",
   dark: "button-dark",
+  destructive: "button-outline border-destructive text-destructive hover:bg-destructive hover:text-background",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -42,7 +43,7 @@ type NavigationButtonProps = SharedButtonProps &
 export type ButtonProps = ActionButtonProps | NavigationButtonProps;
 
 function buttonClassName(variant: ButtonVariant, size: ButtonSize, className?: string) {
-  return cn("button-base wave-interactive", variants[variant], sizes[size], className);
+  return cn("button-base", variants[variant], sizes[size], className);
 }
 
 export function Button(props: ButtonProps) {
