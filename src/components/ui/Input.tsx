@@ -3,13 +3,5 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
-  return (
-    <input
-      className={cn(
-        "input-base text-sm",
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <input className={cn("input-base text-sm", className)} {...props} />;
 }

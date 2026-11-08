@@ -22,10 +22,7 @@ export function AnimatedLink({
   ...props
 }: AnimatedLinkProps) {
   return (
-    <Link
-      className={cn("animated-link", tones[tone], className)}
-      {...props}
-    >
+    <Link className={cn("animated-link", tones[tone], className)} {...props}>
       {renderWaveText(children)}
     </Link>
   );

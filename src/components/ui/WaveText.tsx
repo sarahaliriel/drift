@@ -36,9 +36,17 @@ export function WaveText({
           };
 
           return (
-            <span className="wave-character" style={style} key={`${character}-${index}`}>
-              <span className="wave-character-current">{character === " " ? "\u00a0" : character}</span>
-              <span className="wave-character-next">{character === " " ? "\u00a0" : character}</span>
+            <span
+              className="wave-character"
+              style={style}
+              key={`${character}-${index}`}
+            >
+              <span className="wave-character-current">
+                {character === " " ? "\u00a0" : character}
+              </span>
+              <span className="wave-character-next">
+                {character === " " ? "\u00a0" : character}
+              </span>
             </span>
           );
         })}
@@ -53,8 +61,15 @@ export function renderWaveText(children: ReactNode): ReactNode {
       return child.length > 0 ? <WaveText>{child}</WaveText> : child;
     }
 
-    if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment) {
-      return cloneElement(child, undefined, renderWaveText(child.props.children));
+    if (
+      isValidElement<{ children?: ReactNode }>(child) &&
+      child.type === Fragment
+    ) {
+      return cloneElement(
+        child,
+        undefined,
+        renderWaveText(child.props.children),
+      );
     }
 
     return child;

@@ -4,7 +4,13 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { renderWaveText } from "@/components/ui/WaveText";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "dark" | "destructive";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "dark"
+  | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variants: Record<ButtonVariant, string> = {
@@ -13,7 +19,8 @@ const variants: Record<ButtonVariant, string> = {
   outline: "button-outline",
   ghost: "button-ghost",
   dark: "button-dark",
-  destructive: "button-outline border-destructive text-destructive hover:bg-destructive hover:text-background",
+  destructive:
+    "button-outline border-destructive text-destructive hover:bg-destructive hover:text-background",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -42,17 +49,16 @@ type NavigationButtonProps = SharedButtonProps &
 
 export type ButtonProps = ActionButtonProps | NavigationButtonProps;
 
-function buttonClassName(variant: ButtonVariant, size: ButtonSize, className?: string) {
+function buttonClassName(
+  variant: ButtonVariant,
+  size: ButtonSize,
+  className?: string,
+) {
   return cn("button-base", variants[variant], sizes[size], className);
 }
 
 export function Button(props: ButtonProps) {
-  const {
-    children,
-    variant = "primary",
-    size = "md",
-    className,
-  } = props;
+  const { children, variant = "primary", size = "md", className } = props;
 
   if ("href" in props && props.href !== undefined) {
     const { href, disabled, onClick, ...linkProps } = props;

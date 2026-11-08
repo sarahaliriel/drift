@@ -3,6 +3,8 @@
   /* Base surfaces */
   --color-background: #fdfffb;
   --color-foreground: #0c0a14;
+  --color-background-inverse: #0c0a14;
+  --color-foreground-inverse: #fdfffb;
   --color-surface: #ffffff;
   --color-surface-secondary: #f4f2f7;
   --color-surface-elevated: #ffffff;
@@ -51,7 +53,11 @@
   --shadow-glow-secondary: 0 0 28px rgb(123 0 213 / 0.25);
 
   /* Reusable decorative treatments */
-  --gradient-brand: linear-gradient(115deg, var(--color-primary), var(--color-secondary));
+  --gradient-brand: linear-gradient(
+    115deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
   --gradient-primary: linear-gradient(135deg, var(--color-primary), #e6ff91);
   --gradient-accent: linear-gradient(135deg, var(--color-secondary), #b75cff);
 
