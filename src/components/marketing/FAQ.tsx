@@ -71,7 +71,7 @@ export function FAQ() {
           <p className="faq-eyebrow">FAQ</p>
           <h2 id="faq-title">
             Questions before<br />
-            <span>you start</span>
+            <span>you start.</span>
           </h2>
           <p className="faq-description">
             The short version of everything you probably want to know before

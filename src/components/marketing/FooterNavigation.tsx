@@ -42,7 +42,7 @@ export function FooterNavigation() {
         >
           <h3 id={group.id} className="footer-nav-heading">
             <span className="footer-nav-number">{group.number} /</span>{" "}
-            <span>{group.title}</span>
+            <span>{group.title}.</span>
           </h3>
           <ul className="footer-nav-list">
             {group.items.map((item) => (

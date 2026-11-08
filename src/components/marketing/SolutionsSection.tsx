@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 
@@ -39,6 +39,8 @@ function ScrollStatements() {
 
     gsap.registerPlugin(ScrollTrigger);
     const rows = Array.from(track.querySelectorAll<HTMLElement>(".solutions-statement"));
+    const cards = Array.from(section.querySelectorAll<HTMLElement>(".solutions-card"));
+    const cta = section.querySelector<HTMLElement>(".solutions-cta");
     const rootStyle = getComputedStyle(document.documentElement);
     const muted = rootStyle.getPropertyValue("--color-muted-foreground").trim();
     const foreground = rootStyle.getPropertyValue("--color-foreground").trim();
@@ -47,7 +49,7 @@ function ScrollStatements() {
     let disposed = false;
 
     const render = (progress: number) => {
-      const position = progress * (rows.length - 1);
+      const position = Math.min(1, progress / 0.72) * (rows.length - 1);
       const radius = Math.min(230, Math.max(120, window.innerHeight * (window.innerWidth < 768 ? 0.19 : 0.24)));
       rows.forEach((row, index) => {
         const delta = index - position;
@@ -71,35 +73,49 @@ function ScrollStatements() {
         rows.forEach((row, index) => row.classList.toggle("is-active", index === active));
         lastIndex = active;
       }
+      cards.forEach((card, index) => {
+        const entrance = Math.max(0, Math.min(1, (progress - 0.73 - index * 0.055) / 0.11));
+        gsap.set(card, { autoAlpha: entrance, y: (1 - entrance) * 28 });
+      });
+      if (cta) {
+        const entrance = Math.max(0, Math.min(1, (progress - 0.9) / 0.1));
+        gsap.set(cta, { autoAlpha: entrance, y: (1 - entrance) * 16 });
+      }
+    };
+
+    const statementDistance = () => Math.max(1150, window.innerHeight * (window.innerWidth < 768 ? 3.2 : 3.5));
+    const overlapDistance = () => section.getBoundingClientRect().height;
+    const renderScroll = (self: ScrollTrigger) => {
+      const distance = statementDistance();
+      render(Math.min(1, self.progress * (distance + overlapDistance()) / distance));
     };
 
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: () => `+=${Math.max(1150, window.innerHeight * (window.innerWidth < 768 ? 2.8 : 3.5))}`,
+      // The last viewport keeps the finished reel still while Open Source covers it.
+      end: () => `+=${statementDistance() + overlapDistance()}`,
       pin: true,
       pinSpacing: true,
       scrub: true,
       invalidateOnRefresh: true,
-      onUpdate: (self) => render(self.progress),
-      onRefresh: (self) => render(self.progress),
+      onUpdate: renderScroll,
+      onRefresh: renderScroll,
     });
-    const observer = new ResizeObserver(() => ScrollTrigger.refresh());
-    rows.forEach((row) => observer.observe(row));
     document.fonts.ready.then(() => { if (!disposed) ScrollTrigger.refresh(); });
-    render(trigger.progress);
+    renderScroll(trigger);
     return () => {
       disposed = true;
-      observer.disconnect();
       trigger.kill();
       gsap.set(rows, { clearProps: "transform,opacity,color,visibility" });
+      gsap.set([...cards, cta].filter(Boolean), { clearProps: "transform,opacity,visibility" });
     };
   }, [reduceMotion]);
 
   return (
     <div ref={sectionRef} className="solutions-reel" aria-label="What Drift helps you do">
       <div className="solutions-reel-viewport">
-        <h2 id="solutions-title" className="solutions-heading container-wide">Consistency matters.</h2>
+        <h2 id="solutions-title" className="solutions-heading">CONSISTENCY <span>MATTERS.</span></h2>
         <div className="solutions-guide solutions-guide-top" aria-hidden="true" />
         <div className="solutions-guide solutions-guide-bottom" aria-hidden="true" />
         <div className="solutions-progress" aria-hidden="true"><span ref={counterRef}>01</span><span> / 08</span></div>
@@ -110,21 +126,24 @@ function ScrollStatements() {
             </p>
           ))}
         </div>
+        <div className="solutions-conclusion">
+          <SolutionCards />
+          <SolutionsCTA />
+        </div>
       </div>
     </div>
   );
 }
 
 function SolutionCards() {
-  const reduceMotion = useReducedMotion();
   return (
     <div className="solutions-content container-wide">
       <div className="solutions-cards">
         {cards.map((card, index) => (
-          <motion.article key={card.label} className="surface-card solutions-card" initial={reduceMotion ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+          <article key={card.label} className="surface-card solutions-card">
             <span className="solutions-card-number">{String(index + 1).padStart(2, "0")}</span>
             <div className="solutions-card-copy"><span className="solutions-card-category">{card.label}</span><h3>{card.title}</h3><p>{card.description}</p></div>
-          </motion.article>
+          </article>
         ))}
       </div>
     </div>
@@ -142,5 +161,5 @@ function SolutionsCTA() {
 }
 
 export function SolutionsSection() {
-  return <section id="solutions" className="solutions-section" aria-labelledby="solutions-title" data-navbar-theme="light"><ScrollStatements /><SolutionCards /><SolutionsCTA /></section>;
+  return <section id="solutions" className="solutions-section" aria-labelledby="solutions-title" data-navbar-theme="light"><ScrollStatements /></section>;
 }

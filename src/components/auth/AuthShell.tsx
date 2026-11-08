@@ -20,7 +20,7 @@ export function AuthShell({
         {eyebrow}
       </p>
       <h1 id="auth-title" className="auth-title">
-        {title}
+        {title}.
       </h1>
       {description ? <p className="auth-description">{description}</p> : null}
       <div className="auth-form-content">{children}</div>
