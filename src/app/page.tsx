@@ -8,6 +8,7 @@ import { Intro } from "@/components/intro/Intro";
 import ShapeWaves from "@/components/marketing/ShapeWaves";
 import { ProductSection } from "@/components/marketing/ProductSection";
 import { SolutionsSection } from "@/components/marketing/SolutionsSection";
+import { OpenSource } from "@/components/marketing/OpenSource";
 
 export default function HomePage() {
   return (
@@ -19,6 +20,7 @@ export default function HomePage() {
           <Hero />
           <ProductSection />
           <SolutionsSection />
+          <OpenSource />
           <FAQ />
         </main>
         <div className="closing-scene">

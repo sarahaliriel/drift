@@ -85,16 +85,18 @@ function ScrollStatements() {
 
     const statementDistance = () => Math.max(1150, window.innerHeight * (window.innerWidth < 768 ? 3.2 : 3.5));
     const overlapDistance = () => section.getBoundingClientRect().height;
+    // Leave the completed statements, cards, and CTA fully visible before the next panel enters.
+    const completedHoldDistance = () => overlapDistance() * 0.3;
     const renderScroll = (self: ScrollTrigger) => {
       const distance = statementDistance();
-      render(Math.min(1, self.progress * (distance + overlapDistance()) / distance));
+      render(Math.min(1, self.progress * (distance + completedHoldDistance() + overlapDistance()) / distance));
     };
 
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
       // The last viewport keeps the finished reel still while Open Source covers it.
-      end: () => `+=${statementDistance() + overlapDistance()}`,
+      end: () => `+=${statementDistance() + completedHoldDistance() + overlapDistance()}`,
       pin: true,
       pinSpacing: true,
       scrub: true,
