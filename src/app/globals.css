@@ -1161,3 +1161,49 @@ a {
     display: none;
   }
 }
+
+/* Solutions: pinned cylindrical typography with a compact conclusion. */
+.solutions-section { --color-background: var(--color-foreground-inverse); --color-foreground: var(--color-background-inverse); --solutions-wheel-center: 53svh; --solutions-story-gap: clamp(5rem, 9vw, 8rem); --solutions-row-half: clamp(.625rem, 2vw, 2.375rem); background: var(--color-background); color: var(--color-foreground); }
+.solutions-heading { position: absolute; z-index: 3; bottom: calc(100svh - var(--solutions-wheel-center) + var(--solutions-story-gap) + var(--solutions-row-half) + 6rem); left: 50%; width: min(calc(100% - 2rem), var(--container-wide)); margin: 0; padding: 0; color: var(--color-foreground); font-family: var(--font-display), sans-serif; font-size: clamp(4rem, 6.2vw, 7.5rem); font-weight: 400; letter-spacing: -.045em; line-height: .9; text-align: center; text-transform: uppercase; transform: translateX(-50%); pointer-events: none; }
+.solutions-reel { position: relative; height: 100svh; }
+.solutions-reel-viewport { position: relative; height: 100svh; min-height: 30rem; overflow: hidden; isolation: isolate; perspective: 800px; }
+.solutions-track { position: absolute; inset: 0; transform-style: preserve-3d; }
+.solutions-statement { position: absolute; top: var(--solutions-wheel-center); left: 50%; display: block; width: min(78vw, 75rem); margin: 0; color: var(--color-muted-foreground); font-family: var(--font-display), sans-serif; font-size: clamp(1.25rem, 4vw, 4.75rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1; white-space: nowrap; text-align: center; transform: translate(-50%, -50%); transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; }
+.solutions-statement.is-active.solutions-tone-green { text-decoration: underline; text-decoration-color: var(--color-primary); text-decoration-thickness: .06em; text-underline-offset: .11em; }
+.solutions-guide { position: absolute; z-index: 2; left: clamp(1rem, 4vw, 4rem); right: clamp(1rem, 4vw, 4rem); height: 1px; background: var(--color-border); pointer-events: none; }
+.solutions-guide-top { top: calc(var(--solutions-wheel-center) - clamp(3.25rem, 6vw, 5.5rem)); }
+.solutions-guide-bottom { top: calc(var(--solutions-wheel-center) + clamp(3.25rem, 6vw, 5.5rem)); }
+.solutions-progress { position: absolute; z-index: 3; top: var(--solutions-wheel-center); left: clamp(1rem, 4vw, 4rem); width: min(11vw, 9rem); transform: translateY(-50%); color: var(--color-secondary); font-family: var(--font-hand), sans-serif; font-size: .8rem; letter-spacing: .08em; }
+.solutions-progress span:last-child { color: var(--color-muted-foreground); }
+.solutions-content { position: relative; z-index: 3; margin-top: calc(-100svh + var(--solutions-wheel-center) + var(--solutions-story-gap) + var(--solutions-row-half)); padding-block: 0; }
+.solutions-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; max-width: 68rem; margin-inline: auto; }
+.solutions-card { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); align-items: start; gap: .55rem; min-height: 6.6rem; border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); background: transparent; padding: .85rem 1rem; box-shadow: none; transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out); }
+.solutions-card:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
+.solutions-card-number { color: var(--color-secondary); font-family: var(--font-hand), sans-serif; font-size: .8rem; font-weight: 700; }
+.solutions-card-category { display: block; margin-bottom: .25rem; color: var(--color-muted-foreground); font-family: var(--font-hand), sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .08em; }
+.solutions-card h3 { margin: 0 0 .2rem; font-family: var(--font-sans), sans-serif; font-size: clamp(.95rem, 1.15vw, 1.15rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.12; }
+.solutions-card p { margin: 0; color: var(--color-muted); font-size: .78rem; line-height: 1.35; }
+.solutions-cta { display: flex; justify-content: center; padding-block: clamp(1.25rem, 2vw, 2rem) clamp(3rem, 5vw, 5rem); }
+.solutions-cta-actions { display: flex; flex: none; gap: .6rem; }
+@media (max-width: 767px) {
+  .solutions-section { --color-background: var(--color-foreground-inverse); --color-foreground: var(--color-background-inverse); --solutions-wheel-center: 52svh; }
+  .solutions-reel-viewport { min-height: 0; perspective: 620px; }
+  .solutions-heading { bottom: calc(100svh - var(--solutions-wheel-center) + var(--solutions-story-gap) + var(--solutions-row-half) + 4rem); font-size: clamp(2.5rem, 10vw, 4rem); }
+  .solutions-statement { width: calc(100vw - 2rem); margin: 0; font-size: clamp(.875rem, 4vw, 2rem); }
+  .solutions-progress { left: 1rem; width: auto; top: calc(var(--solutions-wheel-center) - 7rem); transform: none; }
+  .solutions-guide-top { top: calc(var(--solutions-wheel-center) - 5.5rem); }
+  .solutions-guide-bottom { top: calc(var(--solutions-wheel-center) + 5.5rem); }
+  .solutions-cards { grid-template-columns: 1fr; }
+  .solutions-card { min-height: 0; }
+  .solutions-cta-actions a { flex: 1; }
+}
+@media (max-width: 420px) { .solutions-cta-actions { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) {
+  .solutions-reel { height: auto !important; }
+  .solutions-reel-viewport { height: auto; overflow: visible; padding-block: 3rem; perspective: none; }
+  .solutions-heading { position: relative; bottom: auto; left: auto; width: min(calc(100% - 2rem), var(--container-wide)); margin: 0 auto 2rem; opacity: 1 !important; transform: none !important; }
+  .solutions-track { position: relative; inset: auto; transform-style: flat; }
+  .solutions-statement { position: relative; inset: auto; width: auto; margin: 0; padding: 1.25rem 1rem; border-bottom: 1px solid var(--color-border); color: var(--color-foreground); opacity: 1 !important; transform: none !important; white-space: normal; text-align: left; }
+  .solutions-content { margin-top: 0; }
+  .solutions-guide, .solutions-progress { display: none; }
+}

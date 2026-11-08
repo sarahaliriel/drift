@@ -59,7 +59,7 @@ export function FAQ() {
   const reveal = reduceMotion ? undefined : { opacity: 1, y: 0 };
 
   return (
-    <section id="solutions" className="faq-section" aria-labelledby="faq-title" data-navbar-theme="dark">
+    <section id="faq" className="faq-section" aria-labelledby="faq-title" data-navbar-theme="dark">
       <div className="faq-shell">
         <motion.header
           className="faq-intro"

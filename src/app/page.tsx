@@ -6,6 +6,7 @@ import { FAQ } from "@/components/marketing/FAQ";
 import { LandingTheme } from "@/components/marketing/LandingTheme";
 import { Intro } from "@/components/intro/Intro";
 import { ProductSection } from "@/components/marketing/ProductSection";
+import { SolutionsSection } from "@/components/marketing/SolutionsSection";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         <main>
           <Hero />
           <ProductSection />
+          <SolutionsSection />
           <FAQ />
           <FinalCTA />
         </main>
