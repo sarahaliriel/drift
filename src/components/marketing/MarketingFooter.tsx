@@ -4,11 +4,20 @@ import { FooterNavigation } from "@/components/marketing/FooterNavigation";
 
 export function MarketingFooter() {
   return (
-    <footer className="marketing-footer overflow-hidden">
+    <footer
+      className="marketing-footer overflow-hidden"
+      data-navbar-theme="dark"
+    >
       <div className="container-wide">
         <div className="footer-divider h-px bg-secondary-foreground/20" />
 
-        <div className="footer-primary grid gap-10 py-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-start md:gap-12 md:py-12 lg:grid-cols-[minmax(19rem,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+        <div
+          className={[
+            "footer-primary grid gap-10 py-10",
+            "md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-start md:gap-12 md:py-12",
+            "lg:grid-cols-[minmax(19rem,0.8fr)_minmax(0,1.2fr)] lg:gap-20",
+          ].join(" ")}
+        >
           <div className="footer-enter flex w-full justify-center md:justify-start md:pt-4">
             <div className="h-32 overflow-hidden md:h-36">
               <Image
@@ -30,12 +39,12 @@ export function MarketingFooter() {
 
         <div className="flex flex-col gap-2 py-4 text-xs leading-5 text-secondary-foreground/65 sm:flex-row sm:items-center sm:justify-between md:py-5">
           <p>
-            © 2026 Drift. {" "}
+            © 2026 Drift.{" "}
             <a
               href="https://sarahaliriel.tech"
               target="_blank"
               rel="noreferrer"
-              className="transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none"
+              className="footer-credit-link transition-colors focus-visible:outline-none"
             >
               Sarah Aliriel
             </a>

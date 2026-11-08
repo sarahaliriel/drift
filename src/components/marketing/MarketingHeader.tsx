@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 import { CompactDesktopNavigation } from "@/components/marketing/site-header/compact-desktop-navigation";
@@ -16,6 +16,8 @@ const transition = {
   duration: 0.62,
   ease: [0.76, 0, 0.24, 1],
 } as const;
+
+type NavbarTheme = "light" | "dark";
 
 function AnnouncementBanner({ onClose }: { onClose: () => void }) {
   return (
@@ -50,22 +52,76 @@ function AnnouncementBanner({ onClose }: { onClose: () => void }) {
   );
 }
 
+/** Uses the section directly behind the fixed header as the source of its theme. */
+function useNavbarTheme() {
+  const [theme, setTheme] = useState<NavbarTheme>("light");
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const headerMidpoint = 40;
+      const section = [...document.querySelectorAll<HTMLElement>(
+        "[data-navbar-theme]",
+      )].find((element) => {
+        const { top, bottom } = element.getBoundingClientRect();
+        return top <= headerMidpoint && bottom >= headerMidpoint;
+      });
+
+      setTheme(section?.dataset.navbarTheme === "dark" ? "dark" : "light");
+    };
+
+    updateTheme();
+    window.addEventListener("scroll", updateTheme, { passive: true });
+    window.addEventListener("resize", updateTheme, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateTheme);
+      window.removeEventListener("resize", updateTheme);
+    };
+  }, []);
+
+  return theme;
+}
+
 export function MarketingHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const pathname = usePathname();
   const { isCompact, sentinelRef } = useHeaderScrollState();
   const reduceMotion = Boolean(useReducedMotion());
+  const navbarTheme = useNavbarTheme();
+  const isDark = navbarTheme === "dark";
+  const headerTheme = isDark
+    ? {
+        "--color-foreground": "#fdfffb",
+        "--color-border": "#3c3846",
+        "--color-surface-elevated": "#14111e",
+        "--color-surface-secondary": "#1c1827",
+      }
+    : {
+        "--color-foreground": "#0c0a14",
+        "--color-border": "#ddd9e3",
+        "--color-surface-elevated": "#ffffff",
+        "--color-surface-secondary": "#f4f2f7",
+      };
 
   return (
     <>
       <motion.header
-        className="marketing-header fixed inset-x-0 top-0 z-50 h-20.5 bg-surface"
+        className="marketing-header fixed inset-x-0 top-0 z-50 h-20.5"
         data-compact={isCompact || undefined}
         animate={{
-          backgroundColor: isCompact ? "transparent" : "var(--color-surface)",
+          ...headerTheme,
+          backgroundColor: isCompact
+            ? "rgba(255, 255, 255, 0)"
+            : isDark
+              ? "#12101a"
+              : "#ffffff",
         }}
-        transition={reduceMotion ? { duration: 0.08 } : transition}
+        transition={
+          reduceMotion
+            ? { duration: 0.01 }
+            : { duration: 0.16, ease: [0.22, 1, 0.36, 1] }
+        }
       >
         <motion.div
           className="marketing-header-desktop-full container-wide hidden h-full items-center lg:flex"
@@ -145,9 +201,7 @@ export function MarketingHeader() {
           className="marketing-header-rule pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border"
           animate={{ opacity: isCompact ? 0 : 1, scaleX: isCompact ? 0.2 : 1 }}
           transition={
-            reduceMotion
-              ? { duration: 0.08 }
-              : { ...transition, duration: 0.3 }
+            reduceMotion ? { duration: 0.08 } : { ...transition, duration: 0.3 }
           }
           aria-hidden="true"
         />

@@ -1,15 +1,26 @@
 import { Hero } from "@/components/marketing/Hero";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
+import { FinalCTA } from "@/components/marketing/FinalCTA";
+import { FAQ } from "@/components/marketing/FAQ";
+import { LandingTheme } from "@/components/marketing/LandingTheme";
+import { Intro } from "@/components/intro/Intro";
+import { ProductSection } from "@/components/marketing/ProductSection";
 
 export default function HomePage() {
   return (
     <>
-      <MarketingHeader />
-      <main>
-        <Hero />
-      </main>
-      <MarketingFooter />
+      <Intro />
+      <LandingTheme>
+        <MarketingHeader />
+        <main>
+          <Hero />
+          <ProductSection />
+          <FAQ />
+          <FinalCTA />
+        </main>
+        <MarketingFooter />
+      </LandingTheme>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { LinkButton } from "@/components/ui/Button";
 import { marketingNavigation } from "@/config/marketing-navigation";
+import { ResourcesMenu } from "@/components/marketing/site-header/resources-menu";
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 
@@ -19,10 +20,25 @@ export function CompactDesktopNavigation({
         className="flex items-center gap-4 xl:gap-6"
         aria-label="Main navigation"
       >
-        {marketingNavigation.map((item) => (
+        {marketingNavigation.slice(0, 2).map((item) => (
           <AnimatedLink
             key={item.label}
             href={item.href}
+            target={item.href.startsWith("http") ? "_blank" : undefined}
+            rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+            aria-current={currentPath === item.href ? "page" : undefined}
+            className="whitespace-nowrap text-[0.9rem] font-medium text-foreground/75 aria-[current=page]:text-accent"
+          >
+            {item.label}
+          </AnimatedLink>
+        ))}
+        <ResourcesMenu compact />
+        {marketingNavigation.slice(2).map((item) => (
+          <AnimatedLink
+            key={item.label}
+            href={item.href}
+            target={item.href.startsWith("http") ? "_blank" : undefined}
+            rel={item.href.startsWith("http") ? "noreferrer" : undefined}
             aria-current={currentPath === item.href ? "page" : undefined}
             className="whitespace-nowrap text-[0.9rem] font-medium text-foreground/75 aria-[current=page]:text-accent"
           >

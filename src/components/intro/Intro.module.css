@@ -1,0 +1,268 @@
+.intro {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #0c0a14;
+  color: #fdfffb;
+  clip-path: inset(0 0 0 0);
+  animation: reveal-site 450ms cubic-bezier(0.65, 0, 0.35, 1) 2070ms forwards;
+  pointer-events: auto;
+}
+
+.scanLine {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: #c8f525;
+  box-shadow: 0 0 14px rgb(200 245 37 / 0.18);
+  opacity: 0;
+  transform: translate3d(-1px, 0, 0);
+  animation: scan 1950ms cubic-bezier(0.62, 0, 0.28, 1) 120ms forwards;
+  will-change: transform;
+}
+
+.revealLine {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: #c8f525;
+  box-shadow: 0 0 14px rgb(200 245 37 / 0.18);
+  opacity: 0;
+  transform: translate3d(-1px, 0, 0);
+  animation: pull-reveal 300ms cubic-bezier(0.65, 0, 0.35, 1) 2070ms forwards;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.composition {
+  position: relative;
+  width: min(76vw, 36rem);
+  transform: translateY(-1vh);
+}
+
+.wordmark {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(5.25rem, 14vw, 9rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  opacity: 0;
+  animation: mark-in 300ms cubic-bezier(0.22, 1, 0.36, 1) 100ms forwards;
+}
+
+.offsetLetter {
+  display: inline-block;
+  animation: detect-and-correct 1050ms cubic-bezier(0.22, 1, 0.36, 1) 950ms both;
+}
+
+.readout {
+  width: min(100%, 16rem);
+  margin-top: clamp(1.25rem, 3vw, 1.8rem);
+  margin-left: auto;
+  font-family: var(--font-hand), cursive;
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+}
+
+.checkRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 1.25rem;
+  border-top: 1px solid rgb(253 255 251 / 0.11);
+  color: rgb(253 255 251 / 0.55);
+  opacity: 0;
+  transform: translateY(3px);
+}
+
+.checkRow:nth-child(1) {
+  animation: detail-in 190ms ease-out 400ms forwards;
+}
+
+.checkRow:nth-child(2) {
+  animation: detail-in 190ms ease-out 590ms forwards;
+}
+
+.checkRow:nth-child(3) {
+  animation: detail-in 190ms ease-out 780ms forwards;
+}
+
+.checkRow:nth-child(4) {
+  animation: detail-in 190ms ease-out 970ms forwards;
+}
+
+.pass {
+  color: #c8f525;
+}
+
+.alignmentRow {
+  position: relative;
+  grid-template-columns: 1fr auto;
+}
+
+.driftState {
+  grid-area: 1 / 2;
+  color: #7b00d5;
+  animation: drift-status 800ms ease-out 1140ms both;
+}
+
+.alignedState {
+  grid-area: 1 / 2;
+  color: #c8f525;
+  opacity: 0;
+  animation: aligned-status 360ms ease-out 1790ms forwards;
+}
+
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes detail-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes detect-and-correct {
+  0%,
+  17% {
+    color: inherit;
+    transform: translateY(0);
+  }
+  32%,
+  62% {
+    color: #7b00d5;
+    transform: translateY(3px);
+  }
+  77%,
+  100% {
+    color: inherit;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift-status {
+  0% {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  18%,
+  70% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes aligned-status {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scan {
+  0% {
+    opacity: 0;
+    transform: translate3d(-1px, 0, 0);
+  }
+  5% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+    transform: translate3d(74vw, 0, 0);
+  }
+  78% {
+    transform: translate3d(calc(74vw - 4px), 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+@keyframes reveal-site {
+  to {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@keyframes pull-reveal {
+  0% {
+    opacity: 1;
+    transform: translate3d(-1px, 0, 0);
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .composition {
+    width: min(80vw, 24rem);
+  }
+
+  .wordmark {
+    font-size: clamp(4.6rem, 24vw, 7rem);
+  }
+
+  .readout {
+    width: min(72vw, 14rem);
+    margin-top: 1.4rem;
+  }
+
+  .checkRow:nth-child(2),
+  .checkRow:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    animation: reduced-reveal 100ms linear 40ms forwards;
+  }
+
+  .scanLine,
+  .revealLine,
+  .readout {
+    display: none;
+  }
+
+  .wordmark {
+    opacity: 1;
+    animation: none;
+  }
+
+  .offsetLetter {
+    animation: none;
+  }
+}
+
+@keyframes reduced-reveal {
+  to {
+    clip-path: inset(0 0 0 100%);
+  }
+}

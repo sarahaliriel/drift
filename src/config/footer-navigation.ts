@@ -15,7 +15,6 @@ export const footerNavigation: readonly FooterNavigationGroup[] = [
     title: "Product",
     items: [
       { label: "Overview", href: "/#overview" },
-      { label: "How it works", href: "/#how-it-works" },
       { label: "Documentation", href: "/docs" },
     ],
   },

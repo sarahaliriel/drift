@@ -8,7 +8,9 @@ import { WaveText } from "@/components/ui/WaveText";
 import { footerNavigation } from "@/config/footer-navigation";
 
 export function FooterNavigation() {
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
+    {},
+  );
 
   function toggleGroup(groupId: string) {
     setExpandedGroups((currentGroups) => ({
@@ -41,7 +43,10 @@ export function FooterNavigation() {
                 onClick={() => toggleGroup(group.id)}
               >
                 <WaveText>{group.title}</WaveText>
-                <Plus className="footer-accordion-icon size-4" aria-hidden="true" />
+                <Plus
+                  className="footer-accordion-icon size-4"
+                  aria-hidden="true"
+                />
               </button>
               <span className="hidden text-sm font-semibold tracking-[-0.01em] text-secondary-foreground md:inline">
                 {group.title}
@@ -55,7 +60,10 @@ export function FooterNavigation() {
             >
               <ul className="footer-nav-list mt-0 text-sm md:mt-5 md:space-y-2.5">
                 {group.items.map((item) => (
-                  <li key={item.label} className="footer-nav-item flex items-center md:min-h-8">
+                  <li
+                    key={item.label}
+                    className="footer-nav-item flex items-center md:min-h-8"
+                  >
                     {item.href ? (
                       <AnimatedLink
                         href={item.href}

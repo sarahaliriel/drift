@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
 
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { LinkButton } from "@/components/ui/Button";
-import { marketingNavigation } from "@/config/marketing-navigation";
+import { marketingNavigation, resourcesNavigation } from "@/config/marketing-navigation";
 import { cn } from "@/lib/utils";
 
 type MobileNavigationProps = {
@@ -76,7 +76,13 @@ export function MobileNavigation({
   return (
     <div className="flex h-full w-full items-center justify-between lg:hidden">
       <Link href="/" className="relative z-30 shrink-0" aria-label="Drift">
-        <Image src="/logos/drift-logo-v1.png" alt="Drift" width={40} height={40} priority />
+        <Image
+          src="/logos/drift-logo-v1.png"
+          alt="Drift"
+          width={40}
+          height={40}
+          priority
+        />
       </Link>
 
       <div className="flex items-center gap-2">
@@ -88,8 +94,13 @@ export function MobileNavigation({
               exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: 10 }}
               transition={{ duration: reduceMotion ? 0.08 : 0.24 }}
             >
-              <LinkButton href="/cadastro" size="sm" className="h-11 rounded-xl px-3.5">
-                Scan project <ArrowRight className="size-4" aria-hidden="true" />
+              <LinkButton
+                href="/cadastro"
+                size="sm"
+                className="h-11 rounded-xl px-3.5"
+              >
+                Scan project{" "}
+                <ArrowRight className="size-4" aria-hidden="true" />
               </LinkButton>
             </motion.div>
           )}
@@ -116,30 +127,88 @@ export function MobileNavigation({
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -12 }}
-            transition={{ duration: reduceMotion ? 0.08 : 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className={cn("marketing-mobile-menu fixed inset-0 z-10 bg-surface", isCompact && "marketing-mobile-menu-compact")}
+            transition={{
+              duration: reduceMotion ? 0.08 : 0.28,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className={cn(
+              "marketing-mobile-menu fixed inset-0 z-10 bg-surface",
+              isCompact && "marketing-mobile-menu-compact",
+            )}
             aria-label="Navegação móvel"
           >
             <div className="mx-auto flex h-full max-w-lg flex-col px-5 pt-25 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
               <div className="border-t border-border">
-              {marketingNavigation.map((item) => (
-                <AnimatedLink
-                  key={item.label}
-                  href={item.href}
-                  aria-current={currentPath === item.href ? "page" : undefined}
-                  onClick={() => onOpenChange(false)}
-                  className="flex min-h-16 w-full items-center border-b border-border py-4 text-[1.2rem] font-medium after:hidden hover:text-accent aria-[current=page]:text-accent"
-                >
-                  {item.label}
-                </AnimatedLink>
-              ))}
+                {marketingNavigation.slice(0, 2).map((item) => (
+                  <AnimatedLink
+                    key={item.label}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    aria-current={
+                      currentPath === item.href ? "page" : undefined
+                    }
+                    onClick={() => onOpenChange(false)}
+                    className={[
+                      "flex min-h-16 w-full items-center border-b border-border py-4",
+                      "text-[1.2rem] font-medium after:hidden hover:text-accent",
+                      "aria-[current=page]:text-accent",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </AnimatedLink>
+                ))}
+                <div className="border-b border-border py-4">
+                  <p className="mb-3 text-xs font-semibold tracking-[0.14em] text-muted uppercase">
+                    Resources
+                  </p>
+                  {resourcesNavigation.map((item) => (
+                    <AnimatedLink
+                      key={item.label}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                      onClick={() => onOpenChange(false)}
+                      className="flex min-h-12 items-center text-[1.2rem] font-medium after:hidden hover:text-accent"
+                    >
+                      {item.label}
+                    </AnimatedLink>
+                  ))}
+                </div>
+                {marketingNavigation.slice(2).map((item) => (
+                  <AnimatedLink
+                    key={item.label}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    aria-current={
+                      currentPath === item.href ? "page" : undefined
+                    }
+                    onClick={() => onOpenChange(false)}
+                    className="flex min-h-16 w-full items-center border-b border-border py-4 text-[1.2rem] font-medium after:hidden hover:text-accent aria-[current=page]:text-accent"
+                  >
+                    {item.label}
+                  </AnimatedLink>
+                ))}
               </div>
               <div className="mt-auto grid gap-3 pt-8">
-                <LinkButton href="/login" variant="outline" size="lg" className="w-full" onClick={() => onOpenChange(false)}>
+                <LinkButton
+                  href="/login"
+                  variant="outline"
+                  size="lg"
+                  className="w-full"
+                  onClick={() => onOpenChange(false)}
+                >
                   Sign in
                 </LinkButton>
-                <LinkButton href="/cadastro" size="lg" className="w-full" onClick={() => onOpenChange(false)}>
-                  Scan project <ArrowRight className="size-4" aria-hidden="true" />
+                <LinkButton
+                  href="/cadastro"
+                  size="lg"
+                  className="w-full"
+                  onClick={() => onOpenChange(false)}
+                >
+                  Scan project{" "}
+                  <ArrowRight className="size-4" aria-hidden="true" />
                 </LinkButton>
               </div>
             </div>

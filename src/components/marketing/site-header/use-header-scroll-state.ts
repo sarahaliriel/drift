@@ -1,7 +1,13 @@
 "use client";
 
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 const desktopMediaQuery = "(min-width: 1024px)";
 
@@ -28,7 +34,9 @@ export function useHeaderScrollState() {
     if (!sentinel) return;
 
     const desktop = window.matchMedia(desktopMediaQuery);
-    const observer = new IntersectionObserver(updateCompactState, { threshold: 0 });
+    const observer = new IntersectionObserver(updateCompactState, {
+      threshold: 0,
+    });
 
     observer.observe(sentinel);
     window.addEventListener("scroll", updateCompactState, { passive: true });
