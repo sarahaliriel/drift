@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Anton, Geist, Patrick_Hand_SC } from "next/font/google";
 import { siteConfig } from "@/config/site";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-sans", subsets: ["latin"] });
@@ -37,10 +39,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
       <body
         className={`${geist.variable} ${anton.variable} ${patrickHand.variable}`}
       >
+        <SmoothScroll />
         {children}
       </body>
     </html>
