@@ -14,7 +14,7 @@ const routeCta = {
 } as const;
 
 const authNavigation = marketingNavigation.map((item) =>
-  item.label === "Platform" ? { ...item, label: "Home", href: "/" } : item,
+  item.label === "Product" ? { ...item, label: "Home", href: "/" } : item,
 );
 
 export function AuthNavbar() {

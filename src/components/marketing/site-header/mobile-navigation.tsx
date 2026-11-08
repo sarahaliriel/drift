@@ -1,10 +1,10 @@
 "use client";
 
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { LinkButton } from "@/components/ui/Button";
@@ -26,6 +26,7 @@ export function MobileNavigation({
   reduceMotion,
   currentPath,
 }: MobileNavigationProps) {
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
 
@@ -46,7 +47,7 @@ export function MobileNavigation({
 
       const focusableElements = [
         menuButtonRef.current,
-        ...menuRef.current.querySelectorAll<HTMLElement>("a[href]"),
+        ...menuRef.current.querySelectorAll<HTMLElement>("a[href], button"),
       ].filter((element): element is HTMLElement => Boolean(element));
       const firstElement = focusableElements[0];
       const lastElement = focusableElements.at(-1);
@@ -132,7 +133,7 @@ export function MobileNavigation({
               ease: [0.22, 1, 0.36, 1],
             }}
             className={cn(
-              "marketing-mobile-menu fixed inset-0 z-10 bg-surface",
+              "marketing-mobile-menu fixed inset-0 z-10 overflow-y-auto bg-surface",
               isCompact && "marketing-mobile-menu-compact",
             )}
             aria-label="Navegação móvel"
@@ -158,22 +159,13 @@ export function MobileNavigation({
                     {item.label}
                   </AnimatedLink>
                 ))}
-                <div className="border-b border-border py-4">
-                  <p className="mb-3 text-xs font-semibold tracking-[0.14em] text-muted uppercase">
-                    Resources
-                  </p>
-                  {resourcesNavigation.map((item) => (
-                    <AnimatedLink
-                      key={item.label}
-                      href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noreferrer" : undefined}
-                      onClick={() => onOpenChange(false)}
-                      className="flex min-h-12 items-center text-[1.2rem] font-medium after:hidden hover:text-accent"
-                    >
-                      {item.label}
-                    </AnimatedLink>
-                  ))}
+                <div className="border-b border-border">
+                  <button type="button" aria-expanded={resourcesOpen} aria-controls="mobile-resources" onClick={() => setResourcesOpen(!resourcesOpen)} className="flex min-h-16 w-full items-center justify-between text-[1.2rem] font-medium hover:text-secondary">
+                    Resources <ChevronDown className={cn("size-4 transition-transform", resourcesOpen && "rotate-180")} />
+                  </button>
+                  {resourcesOpen && <div id="mobile-resources" className="grid gap-1 pb-4 pl-4">
+                    {resourcesNavigation.map((item) => <AnimatedLink key={item.label} href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} onClick={() => onOpenChange(false)} className="flex min-h-11 items-center text-base font-medium after:hidden hover:text-secondary">{item.label}</AnimatedLink>)}
+                  </div>}
                 </div>
                 {marketingNavigation.slice(2).map((item) => (
                   <AnimatedLink

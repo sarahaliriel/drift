@@ -1,6 +1,5 @@
 "use client";
 
-import { useMotionValueEvent, useScroll } from "motion/react";
 import {
   useCallback,
   useEffect,
@@ -14,7 +13,6 @@ const desktopMediaQuery = "(min-width: 1024px)";
 export function useHeaderScrollState() {
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [isCompact, setIsCompact] = useState(false);
-  const { scrollY } = useScroll();
 
   const updateCompactState = useCallback(() => {
     const sentinel = sentinelRef.current;
@@ -22,8 +20,6 @@ export function useHeaderScrollState() {
 
     setIsCompact(sentinel.getBoundingClientRect().bottom < 0);
   }, []);
-
-  useMotionValueEvent(scrollY, "change", updateCompactState);
 
   useLayoutEffect(() => {
     updateCompactState();

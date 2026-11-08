@@ -753,12 +753,32 @@ a {
 }
 
 .marketing-header-desktop-compact-panel {
-  height: 3.75rem;
+  width: max-content;
+  max-width: 100%;
+  height: 3.5rem;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   background: var(--color-surface-elevated);
-  padding-inline: 1rem;
-  box-shadow: none;
+  padding-inline: 0.75rem;
+  box-shadow: 0 10px 30px rgb(12 10 20 / 0.08);
+}
+
+.resources-trigger:is(:hover, :focus-visible) .wave-character-current {
+  transform: translateY(calc(var(--wave-distance) * -1));
+}
+.resources-trigger:is(:hover, :focus-visible) .wave-character-next {
+  transform: translateY(0);
+}
+.marketing-header-desktop-compact .resources-menu {
+  position: static;
+}
+.marketing-header-desktop-compact .resources-dropdown {
+  left: 0;
+  top: 100%;
+  width: 100%;
+  margin-top: 0.75rem;
+  translate: none;
+  transform: none;
 }
 
 .marketing-header-inner-compact {

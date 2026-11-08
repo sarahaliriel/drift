@@ -8,12 +8,13 @@ import Link from "next/link";
 
 type DesktopNavigationProps = {
   currentPath: string;
+  isCompact?: boolean;
 };
 
-export function DesktopNavigation({ currentPath }: DesktopNavigationProps) {
+export function DesktopNavigation({ currentPath, isCompact = false }: DesktopNavigationProps) {
   return (
-    <div className="flex h-full w-full items-center justify-between">
-      <Link href="/" className="shrink-0" aria-label="Drift">
+    <div className={isCompact ? "flex h-full w-full items-center justify-center gap-5" : "grid h-full w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center"}>
+      {!isCompact && <Link href="/" className="shrink-0" aria-label="Drift">
         <Image
           src="/logos/drift-logo-v1.png"
           alt="Drift"
@@ -21,10 +22,10 @@ export function DesktopNavigation({ currentPath }: DesktopNavigationProps) {
           height={48}
           priority
         />
-      </Link>
+      </Link>}
 
       <nav
-        className="flex items-center gap-7 xl:gap-10"
+        className={isCompact ? "flex items-center gap-4" : "flex items-center gap-7 xl:gap-10"}
         aria-label="Navegação principal"
       >
         {marketingNavigation.slice(0, 2).map((item) => (
@@ -54,14 +55,14 @@ export function DesktopNavigation({ currentPath }: DesktopNavigationProps) {
         ))}
       </nav>
 
-      <div className="flex items-center gap-3">
-        <LinkButton href="/login" variant="ghost" size="sm" className="px-5">
+      <div className="flex items-center justify-self-end gap-3">
+        {!isCompact && <LinkButton href="/login" variant="ghost" size="sm" className="px-5">
           Sign in
-        </LinkButton>
+        </LinkButton>}
         <LinkButton
           href="/cadastro"
           size="sm"
-          className="rounded-xl px-5 active:translate-y-px"
+          className={isCompact ? "rounded-xl px-3 active:translate-y-px" : "rounded-xl px-5 active:translate-y-px"}
         >
           Scan project <ArrowRight className="size-4" aria-hidden="true" />
         </LinkButton>

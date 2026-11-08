@@ -21,12 +21,12 @@ type NavbarTheme = "light" | "dark";
 
 function AnnouncementBanner({ onClose }: { onClose: () => void }) {
   return (
-    <div className="marketing-announcement pointer-events-auto relative w-full overflow-hidden rounded-lg bg-primary text-primary-foreground">
+    <div className="marketing-announcement pointer-events-auto relative w-full overflow-hidden rounded-2xl bg-primary text-primary-foreground">
       <a
         href="https://github.com/sarahaliriel/drift"
         target="_blank"
         rel="noopener noreferrer"
-        className="marketing-announcement-link block py-2 pr-10 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-foreground"
+        className="marketing-announcement-link block py-3 pr-12 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-foreground"
         aria-label="Drift em breve — acompanhe o projeto no GitHub"
       >
         <span className="marketing-announcement-track flex w-max items-center gap-6 font-sans text-sm font-semibold uppercase tracking-wide sm:text-base" aria-hidden="true">
@@ -89,7 +89,7 @@ export function MarketingHeader() {
   const { isCompact, sentinelRef } = useHeaderScrollState();
   const reduceMotion = Boolean(useReducedMotion());
   const navbarTheme = useNavbarTheme();
-  const isDark = navbarTheme === "dark";
+  const isDark = navbarTheme === "dark" && !isCompact;
   const headerTheme = isDark
     ? {
         "--color-foreground": "#fdfffb",
@@ -121,20 +121,13 @@ export function MarketingHeader() {
       >
         <motion.div
           className="marketing-header-desktop-full container-wide hidden h-full items-center lg:flex"
+          initial={false}
           animate={{
             opacity: isCompact ? 0 : 1,
             y: reduceMotion || !isCompact ? 0 : -10,
             scale: reduceMotion || !isCompact ? 1 : 0.995,
           }}
-          transition={
-            reduceMotion
-              ? { duration: 0.08 }
-              : {
-                  ...transition,
-                  duration: isCompact ? 0.3 : 0.5,
-                  delay: isCompact ? 0 : 0.08,
-                }
-          }
+          transition={reduceMotion ? { duration: 0.01 } : { ...transition, duration: isCompact ? 0.3 : 0.5, delay: isCompact ? 0 : 0.08 }}
           aria-hidden={isCompact || undefined}
           inert={isCompact}
         >
@@ -142,27 +135,14 @@ export function MarketingHeader() {
         </motion.div>
 
         <motion.div
-          className="marketing-header-desktop-compact absolute top-0 left-1/2 hidden items-center lg:flex"
+          className="marketing-header-desktop-compact absolute left-1/2 top-0 hidden items-center lg:flex"
           initial={false}
-          animate={{
-            opacity: isCompact ? 1 : 0,
-            y: isCompact ? 22 : 12,
-            x: "-50%",
-            scale: reduceMotion || isCompact ? 1 : 0.975,
-          }}
-          transition={
-            reduceMotion
-              ? { duration: 0.08 }
-              : {
-                  ...transition,
-                  duration: isCompact ? 0.58 : 0.32,
-                  delay: isCompact ? 0.08 : 0,
-                }
-          }
+          animate={{ opacity: isCompact ? 1 : 0, y: isCompact ? 16 : 8, x: "-50%", scale: reduceMotion || isCompact ? 1 : 0.975 }}
+          transition={reduceMotion ? { duration: 0.01 } : { ...transition, duration: isCompact ? 0.58 : 0.32, delay: isCompact ? 0.08 : 0 }}
           aria-hidden={!isCompact || undefined}
           inert={!isCompact}
         >
-          <div className="marketing-header-desktop-compact-panel flex items-center gap-4 xl:gap-6">
+          <div className="marketing-header-desktop-compact-panel flex items-center justify-center gap-5">
             <CompactDesktopNavigation currentPath={pathname} />
           </div>
           {isCompact && showAnnouncement && (

@@ -17,7 +17,7 @@ export function CompactDesktopNavigation({
   return (
     <>
       <nav
-        className="flex items-center gap-4 xl:gap-6"
+        className="flex items-center gap-4"
         aria-label="Main navigation"
       >
         {marketingNavigation.slice(0, 2).map((item) => (
@@ -51,7 +51,7 @@ export function CompactDesktopNavigation({
         <LinkButton
           href="/cadastro"
           size="sm"
-          className="shrink-0 rounded-xl px-4 active:translate-y-px"
+          className="shrink-0 rounded-xl px-3 active:translate-y-px"
         >
           Scan project <ArrowRight className="size-4" aria-hidden="true" />
         </LinkButton>
