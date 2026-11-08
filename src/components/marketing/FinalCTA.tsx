@@ -1,22 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
 
-function ProductMockup() {
-  return (
-    <div className="final-cta-mockup" aria-hidden="true">
-      <div className="final-cta-window-bar">
-        <div className="final-cta-window-controls">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="final-cta-window-title" />
-      </div>
-      <div className="final-cta-window-canvas" />
-    </div>
-  );
-}
-
 export function FinalCTA() {
   return (
     <section
@@ -52,8 +36,6 @@ export function FinalCTA() {
             </Button>
           </div>
         </div>
-
-        <ProductMockup />
       </div>
     </section>
   );

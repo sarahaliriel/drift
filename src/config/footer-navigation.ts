@@ -5,34 +5,55 @@ export type FooterNavigationItem = {
 
 export type FooterNavigationGroup = {
   id: string;
+  number: string;
   title: string;
   items: readonly FooterNavigationItem[];
 };
 
+// Add href to a pending item when its destination is ready.
 export const footerNavigation: readonly FooterNavigationGroup[] = [
   {
-    id: "footer-drift",
+    id: "footer-product",
+    number: "01",
     title: "Product",
     items: [
       { label: "Overview", href: "/#overview" },
-      { label: "Documentation", href: "/docs" },
+      { label: "How it works" },
+      { label: "Features" },
+      { label: "Changelog" },
     ],
   },
   {
     id: "footer-resources",
+    number: "02",
     title: "Resources",
     items: [
-      { label: "Blog", href: "/blog" },
-      { label: "Examples", href: "/examples" },
-      { label: "Community", href: "/community" },
+      { label: "Documentation" },
+      { label: "Examples" },
+      { label: "FAQ", href: "/#faq" },
+      { label: "Blog" },
     ],
   },
   {
-    id: "footer-comece-agora",
-    title: "Account",
+    id: "footer-community",
+    number: "03",
+    title: "Community",
     items: [
-      { label: "Sign up", href: "/cadastro" },
-      { label: "Sign in", href: "/login" },
+      { label: "GitHub" },
+      { label: "Contribute" },
+      { label: "Discussions" },
+      { label: "Report a bug" },
+    ],
+  },
+  {
+    id: "footer-legal",
+    number: "04",
+    title: "Legal",
+    items: [
+      { label: "Terms of Use" },
+      { label: "Privacy Policy" },
+      { label: "Cookie Policy" },
+      { label: "License" },
     ],
   },
 ] as const;
