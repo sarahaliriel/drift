@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@vgpu/wgsl": "^0.6.0",
     "lucide-react": "^0.468.0",
     "motion": "^12.23.24",
     "next": "^16.1.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.66.0",
+    "vgpu": "^0.6.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -27,5 +29,13 @@
     "eslint-config-next": "^16.1.5",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "vgpu": {
+      "@modelcontextprotocol/server": "^2.4.0"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.4"
+    }
   }
 }

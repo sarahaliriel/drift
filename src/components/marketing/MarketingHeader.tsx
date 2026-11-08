@@ -107,15 +107,11 @@ export function MarketingHeader() {
   return (
     <>
       <motion.header
-        className="marketing-header fixed inset-x-0 top-0 z-50 h-20.5"
+        className="marketing-header fixed inset-x-0 top-0 z-50 h-26"
         data-compact={isCompact || undefined}
         animate={{
           ...headerTheme,
-          backgroundColor: isCompact
-            ? "rgba(255, 255, 255, 0)"
-            : isDark
-              ? "#12101a"
-              : "#ffffff",
+          backgroundColor: "rgba(255, 255, 255, 0)",
         }}
         transition={
           reduceMotion
@@ -199,7 +195,7 @@ export function MarketingHeader() {
 
         <motion.div
           className="marketing-header-rule pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border"
-          animate={{ opacity: isCompact ? 0 : 1, scaleX: isCompact ? 0.2 : 1 }}
+          animate={{ opacity: 0, scaleX: isCompact ? 0.2 : 1 }}
           transition={
             reduceMotion ? { duration: 0.08 } : { ...transition, duration: 0.3 }
           }
@@ -207,7 +203,7 @@ export function MarketingHeader() {
         />
       </motion.header>
 
-      <div className="relative h-20.5" aria-hidden="true">
+      <div className="relative h-26" aria-hidden="true">
         <div ref={sentinelRef} className="absolute inset-x-0 bottom-0 h-px" />
       </div>
     </>

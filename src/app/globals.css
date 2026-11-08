@@ -136,7 +136,7 @@ a {
 .hero-scroll {
   position: relative;
   /* Cancels the fixed header's layout spacer: scroll progress starts at page top. */
-  margin-top: -5.125rem;
+  margin-top: -6.5rem;
   height: 190svh;
   background: transparent;
 }
@@ -146,9 +146,22 @@ a {
   top: 0;
   height: 100svh;
   overflow: hidden;
+  background: #fdfffb;
+}
+
+.hero-waves {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 12%) 7%, rgb(0 0 0 / 68%) 27%, rgb(0 0 0 / 58%) 62%, rgb(0 0 0 / 10%) 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / 12%) 7%, rgb(0 0 0 / 68%) 27%, rgb(0 0 0 / 58%) 62%, rgb(0 0 0 / 10%) 100%);
 }
 
 .hero-headline {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   height: 100%;

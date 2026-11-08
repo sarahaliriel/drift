@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "motion/react";
 import { useLayoutEffect, useRef, useState } from "react";
+import ShapeWaves from "./ShapeWaves";
 
 const headline = "Keep your design system from drifting.";
 
@@ -56,6 +57,33 @@ export function Hero() {
       data-navbar-theme="light"
     >
       <div className="hero-scroll-stage">
+        <div className="hero-waves">
+          <ShapeWaves
+            text="</>"
+            fontFamily='var(--font-sans), Geist, "Geist Sans", system-ui, sans-serif'
+            fontWeight={500}
+            textSize={0.59}
+            shapes="mixed"
+            cellSize={8}
+            dotSize={0.81}
+            color="#7b00d5"
+            hoverColor="#c8f426"
+            backgroundColor="#fdfffb"
+            speed={0.4}
+            scale={1}
+            contrast={1.4}
+            brightness={0.4}
+            flow={0}
+            direction={0}
+            fade={0.25}
+            interactive
+            splashRadius={40}
+            splashStrength={0.4}
+            glow={0.35}
+            intro
+            introDuration={1.6}
+          />
+        </div>
         <h1 className="hero-headline">
           <span className="sr-only">{headline}</span>
           <motion.span

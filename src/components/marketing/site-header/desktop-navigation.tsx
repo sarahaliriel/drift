@@ -17,8 +17,8 @@ export function DesktopNavigation({ currentPath }: DesktopNavigationProps) {
         <Image
           src="/logos/drift-logo-v1.png"
           alt="Drift"
-          width={40}
-          height={40}
+          width={48}
+          height={48}
           priority
         />
       </Link>
