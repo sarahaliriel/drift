@@ -6,5 +6,13 @@ import { ForgotPasswordForm } from "@/components/auth/ForgotPasswordForm";
 export const metadata: Metadata = { title: "Reset password" };
 
 export default function ForgotPasswordPage() {
-  return <AuthShell title="Recover your access." description="This form is currently a visual prototype."><ForgotPasswordForm /></AuthShell>;
+  return (
+    <AuthShell
+      eyebrow="ACCOUNT RECOVERY"
+      title="Reset your password"
+      description="Enter your email and we’ll send you a reset link."
+    >
+      <ForgotPasswordForm />
+    </AuthShell>
+  );
 }

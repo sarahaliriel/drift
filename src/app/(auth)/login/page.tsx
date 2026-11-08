@@ -6,5 +6,12 @@ import { LoginForm } from "@/components/auth/LoginForm";
 export const metadata: Metadata = { title: "Sign in" };
 
 export default function LoginPage() {
-  return <AuthShell title="Welcome back." description="Sign in to continue to Drift."><LoginForm /></AuthShell>;
+  return (
+    <AuthShell
+      eyebrow="SYSTEM ACCESS"
+      title="Log in to continue"
+    >
+      <LoginForm />
+    </AuthShell>
+  );
 }

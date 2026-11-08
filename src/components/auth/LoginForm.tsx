@@ -6,15 +6,23 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { PasswordField } from "@/components/auth/PasswordField";
+import { AuthFooter } from "@/components/auth/AuthFooter";
 import { Button } from "@/components/ui/Button";
 import { AnimatedLink } from "@/components/ui/AnimatedLink";
 import { Input } from "@/components/ui/Input";
 import { FormField } from "@/components/ui/FormField";
-import { loginSchema, type LoginFormData } from "@/features/auth/schemas/auth-form-schema";
+import {
+  loginSchema,
+  type LoginFormData,
+} from "@/features/auth/schemas/auth-form-schema";
 
 export function LoginForm() {
   const router = useRouter();
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   });
@@ -26,17 +34,59 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-      <FormField label="Email" htmlFor="login-email" error={errors.email?.message}>
-        <Input id="login-email" {...register("email")} type="email" autoComplete="email" placeholder="you@example.com" aria-invalid={Boolean(errors.email)} />
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="auth-form space-y-5">
+      <FormField
+        label="Email"
+        htmlFor="login-email"
+        error={errors.email?.message}
+      >
+        <Input
+          id="login-email"
+          {...register("email")}
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          aria-invalid={Boolean(errors.email)}
+        />
       </FormField>
-      <FormField label="Password" htmlFor="login-password" error={errors.password?.message} action={<AnimatedLink href="/recuperar-senha" className="text-xs font-semibold text-accent hover:underline">Forgot password?</AnimatedLink>}>
-        <PasswordField id="login-password" {...register("password")} autoComplete="current-password" placeholder="Enter your password" aria-invalid={Boolean(errors.password)} />
+      <FormField
+        label="Password"
+        htmlFor="login-password"
+        error={errors.password?.message}
+        action={
+          <AnimatedLink
+            href="/recuperar-senha"
+            className="auth-inline-link"
+          >
+            Forgot password?
+          </AnimatedLink>
+        }
+      >
+        <PasswordField
+          id="login-password"
+          {...register("password")}
+          autoComplete="current-password"
+          placeholder="Enter your password"
+          aria-invalid={Boolean(errors.password)}
+        />
       </FormField>
-      <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? <><LoaderCircle className="size-4 animate-spin" /> Signing in...</> : <>Sign in <ArrowRight className="size-4" /></>}
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <LoaderCircle className="size-4 animate-spin" /> Signing in...
+          </>
+        ) : (
+          <>
+            Log In <ArrowRight className="size-4" />
+          </>
+        )}
       </Button>
-      <p className="text-center text-sm text-muted">Don&apos;t have an account? <AnimatedLink href="/cadastro" className="font-bold text-accent hover:underline">Create account</AnimatedLink></p>
+      <AuthFooter prompt="Not a member yet?" href="/cadastro" linkLabel="Sign up" />
     </form>
   );
 }

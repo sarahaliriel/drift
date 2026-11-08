@@ -13,7 +13,12 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
 
     return (
       <div className="relative">
-        <Input ref={ref} type={visible ? "text" : "password"} className="pr-12" {...props} />
+        <Input
+          ref={ref}
+          type={visible ? "text" : "password"}
+          className="pr-12"
+          {...props}
+        />
         <button
           type="button"
           className="absolute top-1/2 right-1 grid size-10 -translate-y-1/2 place-items-center rounded-lg text-muted hover:text-foreground"
