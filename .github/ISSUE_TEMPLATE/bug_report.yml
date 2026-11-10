@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a problem in Drift.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Please avoid including credentials or private user data.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Include the route or area affected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open ...\n2. Select ...\n3. Observe ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, operating system, and relevant version details.

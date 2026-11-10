@@ -1,0 +1,5 @@
+# AI coding agents
+
+The root `AGENTS.md` contains the local development-agent rules, but `.gitignore` excludes files named `AGENTS.md`, so that guide is not included in a normal repository publication. This page is the published agent-documentation entry point; the [architecture overview](../architecture/overview.md) describes the current source tree, while the [refactoring plan](../architecture/refactoring-plan.md) records historical changes and proposals. Maintainers should decide whether the root guide is intended to remain local-only or be included in the public repository.
+
+Before editing, inspect the relevant implementation and current Git status, preserve pre-existing changes, and verify behavior against source. Treat authentication, scans, findings, and planned integrations according to their current implementation status. Keep changes focused, update affected documentation, and report validation results accurately. Detailed feature boundaries, UI/motion requirements, and validation commands are currently documented in the local root guide.
