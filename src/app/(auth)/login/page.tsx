@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 
-import { AuthShell } from "@/components/auth/AuthShell";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { AuthShell } from "@/features/auth/components/AuthShell";
+import { LoginForm } from "@/features/auth/components/LoginForm";
 
 export const metadata: Metadata = { title: "Sign in" };
 
 export default function LoginPage() {
   return (
-    <AuthShell
-      eyebrow="SYSTEM ACCESS"
-      title="Log in to continue"
-    >
+    <AuthShell eyebrow='SYSTEM ACCESS' title='Log in to continue'>
       <LoginForm />
     </AuthShell>
   );

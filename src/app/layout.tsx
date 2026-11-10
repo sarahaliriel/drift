@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Anton, Geist, Patrick_Hand_SC } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
-import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-sans", subsets: ["latin"] });
@@ -35,15 +33,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geist.variable} ${anton.variable} ${patrickHand.variable}`}
-      >
-        <SmoothScroll />
+    <html lang='en' data-dashboard-theme='light' suppressHydrationWarning>
+      <body className={`${geist.variable} ${anton.variable} ${patrickHand.variable}`}>
         {children}
       </body>
     </html>
