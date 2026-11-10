@@ -16,6 +16,11 @@ coverage/
 .turbo/
 *.cache
 *.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
