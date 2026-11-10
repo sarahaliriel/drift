@@ -4,13 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { renderWaveText } from "@/components/ui/WaveText";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "dark"
-  | "destructive";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "dark" | "destructive";
 export type ButtonSize = "sm" | "md" | "lg";
 
 const variants: Record<ButtonVariant, string> = {
@@ -49,11 +43,7 @@ type NavigationButtonProps = SharedButtonProps &
 
 export type ButtonProps = ActionButtonProps | NavigationButtonProps;
 
-function buttonClassName(
-  variant: ButtonVariant,
-  size: ButtonSize,
-  className?: string,
-) {
+function buttonClassName(variant: ButtonVariant, size: ButtonSize, className?: string) {
   return cn("button-base", variants[variant], sizes[size], className);
 }
 
@@ -80,11 +70,7 @@ export function Button(props: ButtonProps) {
   const { type = "button", ...buttonProps } = props;
 
   return (
-    <button
-      {...buttonProps}
-      type={type}
-      className={buttonClassName(variant, size, className)}
-    >
+    <button {...buttonProps} type={type} className={buttonClassName(variant, size, className)}>
       {renderWaveText(children)}
     </button>
   );

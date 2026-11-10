@@ -53,11 +53,7 @@
   --shadow-glow-secondary: 0 0 28px rgb(123 0 213 / 0.25);
 
   /* Reusable decorative treatments */
-  --gradient-brand: linear-gradient(
-    115deg,
-    var(--color-primary),
-    var(--color-secondary)
-  );
+  --gradient-brand: linear-gradient(115deg, var(--color-primary), var(--color-secondary));
   --gradient-primary: linear-gradient(135deg, var(--color-primary), #e6ff91);
   --gradient-accent: linear-gradient(135deg, var(--color-secondary), #b75cff);
 
